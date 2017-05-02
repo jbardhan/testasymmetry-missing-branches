@@ -1,0 +1,19 @@
+Error using chdir
+Cannot CD to /home/arahimi/Dropbox/lab/projects/slic-jctc-mnsol/nlbc-mobley/nlbc_test/14_dioxane (Name is nonexistent or not a directory).
+
+Error in paramWater (line 66)
+  chdir(dir);
+
+Traceback (most recent call last):
+  File "ParamSolvents.py", line 21, in <module>
+    eng.eval(solvent,nargout=0)
+  File "/usr/local/lib/python2.7/dist-packages/matlab/engine/matlabengine.py", line 84, in __call__
+    _stderr, feval=True).result()
+  File "/usr/local/lib/python2.7/dist-packages/matlab/engine/futureresult.py", line 68, in result
+    return self.__future.result(timeout)
+  File "/usr/local/lib/python2.7/dist-packages/matlab/engine/fevalfuture.py", line 82, in result
+    self._result = pythonengine.getFEvalResult(self._future,self._nargout, None, out=self._out, err=self._err)
+matlab.engine.MatlabExecutionError: 
+  File /home/arahimi/repos/testasymmetry/mobley/paramWater.m, line 66, in paramWater
+Cannot CD to /home/arahimi/Dropbox/lab/projects/slic-jctc-mnsol/nlbc-mobley/nlbc_test/14_dioxane (Name is nonexistent or not a directory).
+
