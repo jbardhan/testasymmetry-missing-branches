@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "ParamSolvents.py", line 20, in <module>
+    eng = matlab.engine.start_matlab()
+  File "/usr/local/lib/python2.7/dist-packages/matlab/engine/__init__.py", line 112, in start_matlab
+    eng = future.result()
+  File "/usr/local/lib/python2.7/dist-packages/matlab/engine/futureresult.py", line 68, in result
+    return self.__future.result(timeout)
+  File "/usr/local/lib/python2.7/dist-packages/matlab/engine/matlabfuture.py", line 87, in result
+    handle = pythonengine.getMATLAB(self._future)
+matlab.engine.EngineError: Transport stopped.
