@@ -1,3 +1,4 @@
+driver_timer = tic();
 addpath('../pointbem');
 addpath('../panelbem');
 loadConstants
@@ -20,7 +21,10 @@ srfSternFile   = 'born/stern_1A_2.srf';
 srfSternData = loadSternSrfIntoPanels(srfSternFile);
 
 % part 1: no-salt reference calculation: PCM/NLBC formulation
+disp("\n");
+disp("start part 1 in driver");
 bemPcm = makePanelBemEcfQualMatrices(srfData, pqrData, epsIn, epsOut);
+disp("from driver, after makePanelBemEcfQualMatrices");
 asymBemPcm = makePanelAsymEcfCollocMatrices(srfData, bemPcm, pqrData);
 [phiReac, sigma] = solvePanelConsistentAsymmetric(srfData, bemPcm, ...
 						        epsIn, epsOut, ...
@@ -29,8 +33,11 @@ asymBemPcm = makePanelAsymEcfCollocMatrices(srfData, bemPcm, pqrData);
 						        asymParams,asymBemPcm);
 dG_nosalt_pcm = 0.5 * pqrData.q' * phiReac;
 
+disp("part 1 in driver is done \n");
 
 % part 2: no-salt reference calculation: YL/NLBC formulation
+
+disp("start part 2 in driver");
 bemYoonDiel = makePanelBemYoonDielMatrices(srfData,pqrData,epsIn,epsOut);
 asymBemYL   = asymBemPcm; % we're reusing asymBemPcm
 [phiReacYL, phiBndy, dphiDnBndy] = ...
@@ -39,9 +46,12 @@ asymBemYL   = asymBemPcm; % we're reusing asymBemPcm
 					conv_factor, pqrData, ...
 					asymParams, asymBemYL);
 dG_nosalt_yl = 0.5 * pqrData.q' * phiReacYL;
+disp("part 2 in driver is done \n");
 
+driver_timerVal = toc(driver_timer);
+disp("driver_timerVal:"), disp(driver_timerVal);
 return
-
+%{
 for l=1:length(kappa_list)
         kappa = kappa_list(l)
 	% part 3: salt without Stern, YL/NLBC formulation
@@ -73,4 +83,4 @@ for l=1:length(kappa_list)
 	dG_stern = 0.5 * pqrData.q' * phiReacStern;
 	
 end
-
+%}
